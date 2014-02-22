@@ -83,7 +83,7 @@ my $vars  = {
                     ID => {
                         schemeID => "GLN",
                         schemeAgencyID => "9",
-                        ttext => "231412341324",
+                        ttext => "1231412341324",
                     },
                     Postbox => "5467",
                     StreetName => "Main street",
@@ -145,6 +145,94 @@ my $vars  = {
                         FamilyName => "M",
                         MiddleName => "Salemacher",
                         JobTitle => "Sales manager",
+                    },
+                ],
+            },
+        },
+        AccountingCustomerParty => {
+            Party => {
+                EndpointID => {
+                    schemeID => "GLN",
+                    schemeAgencyID => "9",
+                    ttext => '1234567987654',
+                },
+                PartyIdentification => { 
+                    ID => {
+                        schemeID => "ZZZ",
+                        ttext => "345KS5324",
+                    },
+                },
+                PartyNames => [
+                    {
+                        Name => "Buyercompany ltd",
+                    },
+                ],
+                PostalAddress => {
+                    ID => {
+                        schemeID => "GLN",
+                        schemeAgencyID => "9",
+                        ttext => "1238764941386",
+                    },
+                    Postbox => "123",
+                    StreetName => "Anystreet",
+                    AdditionalStreetName => "Back door",
+                    BuildingNumber => "8",
+                    Department => "Accounting department",
+                    CityName => "Anytown",
+                    PostalZone => "101",
+                    CountrySubentity => "RegionB",
+                    Country => {
+                        IdentificationCode => {
+                            listID => "ISO3166-1",
+                            listAgencyID => "6",
+                            ttext => "BE",
+                        },
+                    },
+                },
+                PartyTaxSchemes => [
+                    {
+                        CompanyID => {
+                            schemeID => "BEVAT",
+                            schemeAgencyID => "ZZZ",
+                            ttext => "BE54321",
+                        },
+                        TaxScheme => {
+                            ID => {
+                                schemeID => "UN/ECE 5153",
+                                schemeAgencyID => "6",
+                                ttext => "VAT",
+                            },
+                        },
+                    },
+                ],
+                PartyLegalEntities => [
+                    {
+                        RegistrationName => "The buyercompany inc.",
+                        CompanyID => {
+                            schemeID => "ZZZ",
+                            schemeAgencyID => "ZZZ",
+                            ttext => "5645342123",
+                        },
+                        RegistrationAddress => {
+                            CityName => "Mainplace",
+                            CountrySubentity => "RegionB",
+                            Country => {
+                              IdentificationCode => "BE",  
+                            },
+                        },
+                    },
+                ],
+                Contact => {
+                    Telephone => "5121230",
+                    Telefax => "5121231",
+                    ElectronicMail => 'john@buyercompany.eu',
+                },
+                Persons => [
+                    {
+                        FirstName => "John",
+                        FamilyName => "X",
+                        MiddleName => "Doe",
+                        JobTitle => "Purchasing manager",
                     },
                 ],
             },
