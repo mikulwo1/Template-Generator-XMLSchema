@@ -52,57 +52,123 @@
   </cac:AdditionalDocumentReference>
   [%- END %]
   <cac:AccountingSupplierParty>
+    [%- IF Invoice.AccountingSupplierParty.Party %][%- Party = Invoice.AccountingSupplierParty.Party %]
     <cac:Party>
-      <cbc:EndpointID schemeID="GLN" schemeAgencyID="9">1234567890123</cbc:EndpointID>
+      [%- IF Party.EndpointID %]
+      <cbc:EndpointID schemeID="[% Party.EndpointID.schemeID %]" schemeAgencyID="[% Party.EndpointID.schemeAgencyID %]">[% Party.EndpointID.ttext %]</cbc:EndpointID>
+      [%- END %]
+      [%- IF Party.PartyIdentification %]
       <cac:PartyIdentification>
-        <cbc:ID schemeID="ZZZ">Supp123</cbc:ID>
+        <cbc:ID schemeID="[% Party.PartyIdentification.ID.schemeID %]">[% Party.PartyIdentification.ID.ttext %]</cbc:ID>
       </cac:PartyIdentification>
+      [%- END %]
+      [%- FOREACH PartyName IN Party.PartyNames %]
       <cac:PartyName>
-        <cbc:Name>Salescompany ltd.</cbc:Name>
+        <cbc:Name>[% PartyName.Name %]</cbc:Name>
       </cac:PartyName>
+      [%- END %]
+      [%- IF Party.PostalAddress %][% PostalAddress = Party.PostalAddress %]
       <cac:PostalAddress>
+        [%- IF PostalAddress.ID %]
         <cbc:ID schemeID="GLN" schemeAgencyID="9">1231412341324</cbc:ID>
+        [%- END %]
+        [%- IF PostalAddress.Postbox %]
         <cbc:Postbox>5467</cbc:Postbox>
-        <cbc:StreetName>Main street</cbc:StreetName>
-        <cbc:AdditionalStreetName>Suite 123</cbc:AdditionalStreetName>
-        <cbc:BuildingNumber>1</cbc:BuildingNumber>
-        <cbc:Department>Revenue department</cbc:Department>
-        <cbc:CityName>Big city</cbc:CityName>
-        <cbc:PostalZone>54321</cbc:PostalZone>
-        <cbc:CountrySubentityCode>RegionA</cbc:CountrySubentityCode>
+        [%- END %]
+        [%- IF PostalAddress.StreetName %]
+        <cbc:StreetName>[% PostalAddress.StreetName %]</cbc:StreetName>
+        [%- END %]
+        [%- IF  PostalAddress.AdditionalStreetName %]
+        <cbc:AdditionalStreetName>[% PostalAddress.AdditionalStreetName %]</cbc:AdditionalStreetName>
+        [%- END %]
+        [%- IF PostalAddress.BuildingNumber %]
+        <cbc:BuildingNumber>[% PostalAddress.BuildingNumber %]</cbc:BuildingNumber>
+        [%- END %]
+        [%- IF PostalAddress.Department %]
+        <cbc:Department>[% PostalAddress.Department %]</cbc:Department>
+        [%- END %]
+        [%- IF PostalAddress.CityName %]
+        <cbc:CityName>[% PostalAddress.CityName %]</cbc:CityName>
+        [%- END %]
+        [%- IF PostalAddress.PostalZone %]
+        <cbc:PostalZone>[% PostalAddress.PostalZone %]</cbc:PostalZone>
+        [%- END %]
+        [%- IF PostalAddress.CountrySubentityCode  %]
+        <cbc:CountrySubentityCode>[% PostalAddress.CountrySubentityCode %]</cbc:CountrySubentityCode>
+        [%- END %]
+        [%- IF PostalAddress.Country %]
         <cac:Country>
-          <cbc:IdentificationCode listID="ISO3166-1" listAgencyID="6">DK</cbc:IdentificationCode>
+          <cbc:IdentificationCode listID="[% PostalAddress.Country.IdentificationCode.listID %]" listAgencyID="[% PostalAddress.Country.IdentificationCode.listAgencyID %]">[% PostalAddress.Country.IdentificationCode.ttext %]</cbc:IdentificationCode>
         </cac:Country>
+        [%- END %]
       </cac:PostalAddress>
+      [%- END %]
+      [%- FOREACH PartyTaxScheme IN Party.PartyTaxSchemes %]
       <cac:PartyTaxScheme>
-        <cbc:CompanyID schemeID="DKVAT" schemeAgencyID="ZZZ">DK12345</cbc:CompanyID>
+        [%- IF PartyTaxScheme.CompanyID %]
+        <cbc:CompanyID schemeID="[%  PartyTaxScheme.CompanyID.schemeID  %]" schemeAgencyID="[% PartyTaxScheme.CompanyID.schemeAgencyID %]">[% PartyTaxScheme.CompanyID.ttext %]</cbc:CompanyID>
+        [%- END %]
         <cac:TaxScheme>
-          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
+          <cbc:ID schemeID="[% PartyTaxScheme.TaxScheme.ID.schemeID %]" schemeAgencyID="[% PartyTaxScheme.TaxScheme.ID.schemeAgencyID %]">[% PartyTaxScheme.TaxScheme.ID.ttext %]</cbc:ID>
         </cac:TaxScheme>
       </cac:PartyTaxScheme>
+      [%- END %]
+      [%- FOREACH PartyLegalEntity IN Party.PartyLegalEntities %]
       <cac:PartyLegalEntity>
-        <cbc:RegistrationName>The Sellercompany Incorporated</cbc:RegistrationName>
-        <cbc:CompanyID schemeID="CVR" schemeAgencyID="ZZZ">5402697509</cbc:CompanyID>
+        [%- IF PartyLegalEntity.RegistrationName %]
+        <cbc:RegistrationName>[% PartyLegalEntity.RegistrationName %]</cbc:RegistrationName>
+        [%- END %]
+        [%- IF PartyLegalEntity.CompanyID %]
+        <cbc:CompanyID schemeID="[% PartyLegalEntity.CompanyID.schemeID %]" schemeAgencyID="[% PartyLegalEntity.CompanyID.schemeAgencyID %]">[% PartyLegalEntity.CompanyID.ttext %]</cbc:CompanyID>
+        [%- END %]
+        [%- IF PartyLegalEntity.RegistrationAddress %]
         <cac:RegistrationAddress>
-          <cbc:CityName>Big city</cbc:CityName>
-          <cbc:CountrySubentity>RegionA</cbc:CountrySubentity>
+          [%- IF PartyLegalEntity.RegistrationAddress.CityName %]
+          <cbc:CityName>[% PartyLegalEntity.RegistrationAddress.CityName  %]</cbc:CityName>
+          [%- END %]
+          [%- IF PartyLegalEntity.RegistrationAddress.CountrySubentity %]
+          <cbc:CountrySubentity>[% PartyLegalEntity.RegistrationAddress.CountrySubentity %]</cbc:CountrySubentity>
+          [%- END %]
+          [%- IF PartyLegalEntity.RegistrationAddress.Country %]
           <cac:Country>
-            <cbc:IdentificationCode>DK</cbc:IdentificationCode>
+            <cbc:IdentificationCode>[% PartyLegalEntity.RegistrationAddress.Country.IdentificationCode %]</cbc:IdentificationCode>
           </cac:Country>
+          [%- END %]
         </cac:RegistrationAddress>
+        [%- END %]
       </cac:PartyLegalEntity>
+      [%- END %]
+      [%- IF Party.Contact %]
       <cac:Contact>
-        <cbc:Telephone>4621230</cbc:Telephone>
-        <cbc:Telefax>4621231</cbc:Telefax>
-        <cbc:ElectronicMail>antonio@salescompany.dk</cbc:ElectronicMail>
+        [%- IF Party.Contact.Telephone %]
+        <cbc:Telephone>[% Party.Contact.Telephone %]</cbc:Telephone>
+        [%- END %]
+        [%- IF Party.Contact.Telefax %]
+        <cbc:Telefax>[% Party.Contact.Telefax %]</cbc:Telefax>
+        [%- END %]
+        [%- IF Party.Contact.ElectronicMail %]
+        <cbc:ElectronicMail>[% Party.Contact.ElectronicMail %]</cbc:ElectronicMail>
+        [%- END %]
       </cac:Contact>
+      [%- END %]
+      [%- FOREACH Person IN Party.Persons %]
       <cac:Person>
-        <cbc:FirstName>Antonio</cbc:FirstName>
-        <cbc:FamilyName>M</cbc:FamilyName>
-        <cbc:MiddleName>Salemacher</cbc:MiddleName>
-        <cbc:JobTitle>Sales manager</cbc:JobTitle>
+        [%- IF Person.FirstName %]
+        <cbc:FirstName>[% Person.FirstName %]</cbc:FirstName>
+        [%- END %]
+        [%- IF Person.FamilyName %]
+        <cbc:FamilyName>[% Person.FamilyName %]</cbc:FamilyName>
+        [%- END %]
+        [%- IF Person.MiddleName %]
+        <cbc:MiddleName>[% Person.MiddleName %]</cbc:MiddleName>
+        [%- END %]
+        [%- IF Person.JobTitle %]
+        <cbc:JobTitle>[% Person.JobTitle %]</cbc:JobTitle>
+        [%- END %]
       </cac:Person>
+      [%- END %]
     </cac:Party>
+    [%- END %]
   </cac:AccountingSupplierParty>
   <cac:AccountingCustomerParty>
     <cac:Party>

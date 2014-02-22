@@ -61,8 +61,95 @@ my $vars  = {
                 },
             },
         ],
+        AccountingSupplierParty => {
+            Party => {
+                EndpointID => {
+                    schemeID => "GLN",
+                    schemeAgencyID => "9",
+                    ttext => '1234567890123',
+                },
+                PartyIdentification => { 
+                    ID => {
+                        schemeID => "ZZZ",
+                        ttext => "Supp123",
+                    },
+                },
+                PartyNames => [
+                    {
+                        Name => "Salescompany ltd.",
+                    },
+                ],
+                PostalAddress => {
+                    ID => {
+                        schemeID => "GLN",
+                        schemeAgencyID => "9",
+                        ttext => "231412341324",
+                    },
+                    Postbox => "5467",
+                    StreetName => "Main street",
+                    AdditionalStreetName => "Suite 123",
+                    BuildingNumber => "1",
+                    Department => "Revenue department",
+                    CityName => "Big city",
+                    PostalZone => "54321",
+                    CountrySubentityCode => "RegionA",
+                    Country => {
+                        IdentificationCode => {
+                            listID => "ISO3166-1",
+                            listAgencyID => "6",
+                            ttext => "DK",
+                        },
+                    },
+                },
+                PartyTaxSchemes => [
+                    {
+                        CompanyID => {
+                            schemeID => "DKVAT",
+                            schemeAgencyID => "ZZZ",
+                            ttext => "DK12345",
+                        },
+                        TaxScheme => {
+                            ID => {
+                                schemeID => "UN/ECE 5153",
+                                schemeAgencyID => "6",
+                                ttext => "VAT",
+                            },
+                        },
+                    },
+                ],
+                PartyLegalEntities => [
+                    {
+                        RegistrationName => "The Sellercompany Incorporated",
+                        CompanyID => {
+                            schemeID => "CVR",
+                            schemeAgencyID => "ZZZ",
+                            ttext => "5402697509",
+                        },
+                        RegistrationAddress => {
+                            CityName => "Big city",
+                            CountrySubentity => "RegionA",
+                            Country => {
+                              IdentificationCode => "DK",  
+                            },
+                        },
+                    },
+                ],
+                Contact => {
+                    Telephone => "4621230",
+                    Telefax => "4621231",
+                    ElectronicMail => 'antonio@salescompany.dk',
+                },
+                Persons => [
+                    {
+                        FirstName => "Antonio",
+                        FamilyName => "M",
+                        MiddleName => "Salemacher",
+                        JobTitle => "Sales manager",
+                    },
+                ],
+            },
+        },
     },
 };
 
-$tt->process($input, $vars)
-    || die $tt->error( );
+$tt->process($input, $vars) || die $tt->error( );
