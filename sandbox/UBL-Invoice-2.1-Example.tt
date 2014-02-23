@@ -398,44 +398,61 @@
     <cbc:PayableRoundingAmount currencyID="EUR">0.30</cbc:PayableRoundingAmount>
     <cbc:PayableAmount currencyID="EUR">729</cbc:PayableAmount>
   </cac:LegalMonetaryTotal>
+  [%- FOREACH InvoiceLine IN Invoice.InvoiceLines %]
   <cac:InvoiceLine>
-    <cbc:ID>1</cbc:ID>
-    <cbc:Note>Scratch on box</cbc:Note>
-    <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
-    <cbc:LineExtensionAmount currencyID="EUR">1273</cbc:LineExtensionAmount>
-    <cbc:AccountingCost>BookingCode001</cbc:AccountingCost>
+    <cbc:ID>[% InvoiceLine.ID %]</cbc:ID>
+    [%- FOREACH Note IN InvoiceLine.Notes %]
+    <cbc:Note>[% Note.ttext %]</cbc:Note>
+    [%- END %]
+    [%- IF InvoiceLine.InvoicedQuantity %]
+    <cbc:InvoicedQuantity unitCode="[% InvoiceLine.InvoicedQuantity.unitCode %]">[% InvoiceLine.InvoicedQuantity.ttext %]</cbc:InvoicedQuantity>
+    [%- END %]
+    <cbc:LineExtensionAmount currencyID="[% InvoiceLine.LineExtensionAmount.currencyID %]">[% InvoiceLine.LineExtensionAmount.ttext %]</cbc:LineExtensionAmount>
+    [%- IF InvoiceLine.AccountingCost %]
+    <cbc:AccountingCost>[% InvoiceLine.AccountingCost %]</cbc:AccountingCost>
+    [%- END %]
+    [%- FOREACH OrderLineReference IN InvoiceLine.OrderLineReferences %]
     <cac:OrderLineReference>
-      <cbc:LineID>1</cbc:LineID>
+      <cbc:LineID>[% OrderLineReference.LineID %]</cbc:LineID>
     </cac:OrderLineReference>
+    [%- END %]
+    [%- FOREACH AllowanceCharge IN InvoiceLine.AllowanceCharges %]
     <cac:AllowanceCharge>
-      <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
-      <cbc:AllowanceChargeReason>Damage</cbc:AllowanceChargeReason>
-      <cbc:Amount currencyID="EUR">12</cbc:Amount>
+      <cbc:ChargeIndicator>[% AllowanceCharge.ChargeIndicator %]</cbc:ChargeIndicator>
+      <cbc:AllowanceChargeReason>[% AllowanceCharge.AllowanceChargeReason %]</cbc:AllowanceChargeReason>
+      <cbc:Amount currencyID="[% AllowanceCharge.Amount.currencyID %]">[% AllowanceCharge.Amount.ttext %]</cbc:Amount>
     </cac:AllowanceCharge>
-    <cac:AllowanceCharge>
-      <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
-      <cbc:AllowanceChargeReason>Testing</cbc:AllowanceChargeReason>
-      <cbc:Amount currencyID="EUR">10</cbc:Amount>
-    </cac:AllowanceCharge>
+    [%- END %]
+    [%- FOREACH TaxTotal IN InvoiceLine.TaxTotals %]
     <cac:TaxTotal>
-      <cbc:TaxAmount currencyID="EUR">254.6</cbc:TaxAmount>
+      <cbc:TaxAmount currencyID="[% TaxTotal.TaxAmount.currencyID %]">[% TaxTotal.TaxAmount.ttext %]</cbc:TaxAmount>
     </cac:TaxTotal>
+    [%- END %]
+    [%- Item = InvoiceLine.Item %]
     <cac:Item>
+      [%- FOREACH Description IN Item.Descriptions %]
       <cbc:Description languageID="EN">Processor: Intel Core 2 Duo SU9400 LV (1.4GHz). RAM:
 				3MB. Screen 1440x900</cbc:Description>
+      [%- END %]
+      [%- IF Item.Name %]
       <cbc:Name>Labtop computer</cbc:Name>
+      [%- END %]
+      [%- IF Item.SellersItemIdentification %]
       <cac:SellersItemIdentification>
-        <cbc:ID>JB007</cbc:ID>
+        <cbc:ID>[% Item.SellersItemIdentification.ID %]</cbc:ID>
       </cac:SellersItemIdentification>
+      [%- END %]
+      [%- IF Item.StandardItemIdentification %]
       <cac:StandardItemIdentification>
-        <cbc:ID schemeID="GTIN" schemeAgencyID="9">1234567890124</cbc:ID>
+        <cbc:ID schemeID="[% Item.StandardItemIdentification.ID.schemeID %]" schemeAgencyID="[% Item.StandardItemIdentification.ID.schemeAgencyID %]">[% Item.StandardItemIdentification.ID.ttext %]</cbc:ID>
       </cac:StandardItemIdentification>
+      [%- END %]
+      [%- FOREACH CommodityClassification IN Item.CommodityClassifications %]
       <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="113" listID="UNSPSC">12344321</cbc:ItemClassificationCode>
+        <cbc:ItemClassificationCode listAgencyID="[% CommodityClassification.ItemClassificationCode.listAgencyID %]" listID="[% CommodityClassification.ItemClassificationCode.listID %]">[% CommodityClassification.ItemClassificationCode.ttext %]</cbc:ItemClassificationCode>
       </cac:CommodityClassification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="2" listID="CPV">65434568</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
+      [%- END %]
+      [%- FOREACH ClassifiedTaxCategory IN Item.ClassifiedTaxCategories %]
       <ClassifiedTaxCategory xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
         <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">S</cbc:ID>
         <cbc:Percent>20</cbc:Percent>
@@ -443,23 +460,39 @@
           <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
         </TaxScheme>
       </ClassifiedTaxCategory>
+      [%- END %]
+      [%- FOREACH AdditionalItemProperty IN Item.AdditionalItemProperties %]
       <cac:AdditionalItemProperty>
-        <cbc:Name>Color</cbc:Name>
-        <cbc:Value>black</cbc:Value>
+        <cbc:Name>[% AdditionalItemProperty.Name %]</cbc:Name>
+        <cbc:Value>[% AdditionalItemProperty.Value %]</cbc:Value>
       </cac:AdditionalItemProperty>
+      [%- END %]
     </cac:Item>
+    [%- IF InvoiceLine.Price %][%- Price = InvoiceLine.Price %]
     <cac:Price>
-      <cbc:PriceAmount currencyID="EUR">1273</cbc:PriceAmount>
-      <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+      <cbc:PriceAmount currencyID="[% Price.PriceAmount.currencyID %]">[% Price.PriceAmount.ttext %]</cbc:PriceAmount>
+      [%- IF Price.BaseQuantity %]
+      <cbc:BaseQuantity unitCode="[% Price.BaseQuantity.unitCode %]">[% Price.BaseQuantity.ttext %]</cbc:BaseQuantity>
+      [%- END %]
+      [%- FOREACH AllowanceCharge IN Price.AllowanceCharges %]
       <cac:AllowanceCharge>
-        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
-        <cbc:AllowanceChargeReason>Contract</cbc:AllowanceChargeReason>
-        <cbc:MultiplierFactorNumeric>0.15</cbc:MultiplierFactorNumeric>
-        <cbc:Amount currencyID="EUR">225</cbc:Amount>
-        <cbc:BaseAmount currencyID="EUR">1500</cbc:BaseAmount>
+        <cbc:ChargeIndicator>[% AllowanceCharge.ChargeIndicator  %]</cbc:ChargeIndicator>
+        [%- FOREACH AllowanceChargeReason IN AllowanceCharge.AllowanceChargeReasons %]
+        <cbc:AllowanceChargeReason>[% AllowanceChargeReason.ttext %]</cbc:AllowanceChargeReason>
+        [%- END %]
+        [%- IF AllowanceCharge.MultiplierFactorNumeric %]
+        <cbc:MultiplierFactorNumeric>[% AllowanceCharge.MultiplierFactorNumeric %]</cbc:MultiplierFactorNumeric>
+        [%- END %]
+        <cbc:Amount currencyID="[% AllowanceCharge.Amount.currencyID  %]">[% AllowanceCharge.Amount.ttext  %]</cbc:Amount>
+        [%- IF AllowanceCharge.BaseAmount %]
+        <cbc:BaseAmount currencyID="[% AllowanceCharge.BaseAmount.currencyID %]">[% AllowanceCharge.BaseAmount.ttext %]</cbc:BaseAmount>
+        [%- END %]
       </cac:AllowanceCharge>
+      [%- END %]
     </cac:Price>
+    [%- END %]
   </cac:InvoiceLine>
+  [%- END %]
   <cac:InvoiceLine>
     <cbc:ID>2</cbc:ID>
     <cbc:Note>Cover is slightly damaged.</cbc:Note>

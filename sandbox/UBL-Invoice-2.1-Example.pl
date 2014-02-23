@@ -237,6 +237,131 @@ my $vars  = {
                 ],
             },
         },
+        # Still lot missing inside...
+        InvoiceLines => [
+            {
+                ID => "1",
+                Notes => [
+                    {
+                        ttext => "Scratch on box",
+                    },
+                ],
+                LineExtensionAmount => {
+                    currencyID => "EUR",
+                    ttext => "1273",
+                },
+                InvoicedQuantity => {
+                    unitCode => "C62",
+                    ttext => "1",
+                },
+                AccountingCost => "BookingCode001",
+                OrderLineReferences => [
+                    {
+                        LineID => "1",
+                    },
+                ],
+                AllowanceCharges => [
+                    {
+                        ChargeIndicator => "false",
+                        AllowanceChargeReason => "Damage",
+                        Amount => {
+                            currencyID => "EUR",
+                            ttext => "12",
+                        },
+                    },
+                    {
+                        ChargeIndicator => "true",
+                        AllowanceChargeReason => "Testing",
+                        Amount => {
+                            currencyID => "EUR",
+                            ttext => "10",
+                        },
+                    },
+                ],
+                TaxTotals => [
+                    {
+                        TaxAmount => {
+                            currencyID => "EUR",
+                            ttext => "254.6",
+                        },
+                    },
+                ],
+                Item => {
+                    Descriptions => [
+                        {
+                            languageID => "EN",
+                            ttext => "Processor: Intel Core 2 Duo SU9400 LV (1.4GHz). RAM:\n\t\t\t\t3MB. Screen 1440x900",
+                        },
+                    ],
+                    Name => "Labtop computer",
+                    SellersItemIdentification => {
+                        ID => "JB007",
+                    },
+                    StandardItemIdentification => {
+                        ID => {
+                            schemeID => "GTIN",
+                            schemeAgencyID => "9",
+                            ttext => "1234567890124",
+                        }
+                    },
+                    CommodityClassifications => [
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "113",
+                                listID => "UNSPSC",
+                                ttext => "12344321",
+                           },
+                        },
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "2",
+                                listID => "CPV",
+                                ttext => "65434568",
+                            },
+                        },
+                    ],
+                    ClassifiedTaxCategories => [
+                        {
+                        },
+                    ],
+                    AdditionalItemProperties => [
+                        {
+                            Name => "Color",
+                            Value => "black",
+                        },
+                    ],
+                },
+                Price => {
+                    PriceAmount => {
+                        currencyID => "EUR",
+                        ttext => "1273",
+                    },
+                    BaseQuantity => {
+                        unitCode => "C62",
+                        ttext => "1",
+                    },
+                    AllowanceCharges => [
+                        {
+                            ChargeIndicator => "false",
+                            AllowanceChargeReasons => [
+                                {
+                                    ttext =>"Contract",
+                                },
+                            ],
+                            MultiplierFactorNumeric => "0.15",
+                            Amount => {
+                                currencyID => "EUR",
+                                ttext => "225",
+                            },
+                            BaseAmount => {
+                                currencyID => "EUR",
+                                ttext => "1500",
+                            },
+                        },
+                    ],
+                },
+            },
+        ],
     },
 };
 
