@@ -3,7 +3,7 @@
   <cbc:UBLVersionID>[% Invoice.UBLVersionID %]</cbc:UBLVersionID>
   <cbc:ID>[% Invoice.ID %]</cbc:ID>
   <cbc:IssueDate>[% Invoice.IssueDate %]</cbc:IssueDate>
-  <cbc:InvoiceTypeCode listID="UN/ECE 1001 Subset" listAgencyID="6">380</cbc:InvoiceTypeCode>
+  <cbc:InvoiceTypeCode[% IF Invoice.InvoiceTypeCode.listID %] listID="[% Invoice.InvoiceTypeCode.listID %]"[% END %][% IF Invoice.InvoiceTypeCode.listAgencyID %] listAgencyID="[% Invoice.InvoiceTypeCode.listAgencyID %]"[% END %]>[% Invoice.InvoiceTypeCode.ttext %]</cbc:InvoiceTypeCode>
   [%- FOREACH Note IN Invoice.Notes %]
   <cbc:Note[% IF Note.languageID %] languageID="[% Note.languageID %]"[% END %]>[% Note.ttext %]</cbc:Note>
   [%- END %]
@@ -431,11 +431,10 @@
     [%- Item = InvoiceLine.Item %]
     <cac:Item>
       [%- FOREACH Description IN Item.Descriptions %]
-      <cbc:Description languageID="EN">Processor: Intel Core 2 Duo SU9400 LV (1.4GHz). RAM:
-				3MB. Screen 1440x900</cbc:Description>
+      <cbc:Description languageID="[% Description.languageID  %]">[% Description.ttext %]</cbc:Description>
       [%- END %]
       [%- IF Item.Name %]
-      <cbc:Name>Labtop computer</cbc:Name>
+      <cbc:Name>[% Item.Name %]</cbc:Name>
       [%- END %]
       [%- IF Item.SellersItemIdentification %]
       <cac:SellersItemIdentification>
@@ -453,11 +452,11 @@
       </cac:CommodityClassification>
       [%- END %]
       [%- FOREACH ClassifiedTaxCategory IN Item.ClassifiedTaxCategories %]
-      <ClassifiedTaxCategory xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
-        <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">S</cbc:ID>
-        <cbc:Percent>20</cbc:Percent>
+      <ClassifiedTaxCategory xmlns="[% ClassifiedTaxCategory.xmlns  %]">
+        <cbc:ID schemeID="[% ClassifiedTaxCategory.ID.schemeID %]" schemeAgencyID="[% ClassifiedTaxCategory.ID.schemeAgencyID %]">[% ClassifiedTaxCategory.ID.ttext %]</cbc:ID>
+        <cbc:Percent>[% ClassifiedTaxCategory.Percent %]</cbc:Percent>
         <TaxScheme>
-          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
+          <cbc:ID schemeID="[% ClassifiedTaxCategory.TaxScheme.ID.schemeID %]" schemeAgencyID="[% ClassifiedTaxCategory.TaxScheme.ID.schemeAgencyID %]">[% ClassifiedTaxCategory.TaxScheme.ID.ttext %]</cbc:ID>
         </TaxScheme>
       </ClassifiedTaxCategory>
       [%- END %]
@@ -493,165 +492,4 @@
     [%- END %]
   </cac:InvoiceLine>
   [%- END %]
-  <cac:InvoiceLine>
-    <cbc:ID>2</cbc:ID>
-    <cbc:Note>Cover is slightly damaged.</cbc:Note>
-    <cbc:InvoicedQuantity unitCode="C62">-1</cbc:InvoicedQuantity>
-    <cbc:LineExtensionAmount currencyID="EUR">-3.96</cbc:LineExtensionAmount>
-    <cac:OrderLineReference>
-      <cbc:LineID>5</cbc:LineID>
-    </cac:OrderLineReference>
-    <cac:TaxTotal>
-      <cbc:TaxAmount currencyID="EUR">-0.396</cbc:TaxAmount>
-    </cac:TaxTotal>
-    <cac:Item>
-      <cbc:Name>Returned "Advanced computing" book</cbc:Name>
-      <cac:SellersItemIdentification>
-        <cbc:ID>JB008</cbc:ID>
-      </cac:SellersItemIdentification>
-      <cac:StandardItemIdentification>
-        <cbc:ID schemeID="GTIN" schemeAgencyID="9">1234567890125</cbc:ID>
-      </cac:StandardItemIdentification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="113" listID="UNSPSC">32344324</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="2" listID="CPV">65434567</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
-      <ClassifiedTaxCategory xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
-        <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">AA</cbc:ID>
-        <cbc:Percent>10</cbc:Percent>
-        <TaxScheme>
-          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
-        </TaxScheme>
-      </ClassifiedTaxCategory>
-    </cac:Item>
-    <cac:Price>
-      <cbc:PriceAmount currencyID="EUR">3.96</cbc:PriceAmount>
-      <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
-    </cac:Price>
-  </cac:InvoiceLine>
-  <cac:InvoiceLine>
-    <cbc:ID>3</cbc:ID>
-    <cbc:InvoicedQuantity unitCode="C62">2</cbc:InvoicedQuantity>
-    <cbc:LineExtensionAmount currencyID="EUR">4.96</cbc:LineExtensionAmount>
-    <cac:OrderLineReference>
-      <cbc:LineID>3</cbc:LineID>
-    </cac:OrderLineReference>
-    <cac:TaxTotal>
-      <cbc:TaxAmount currencyID="EUR">0.496</cbc:TaxAmount>
-    </cac:TaxTotal>
-    <cac:Item>
-      <cbc:Name>"Computing for dummies" book</cbc:Name>
-      <cac:SellersItemIdentification>
-        <cbc:ID>JB009</cbc:ID>
-      </cac:SellersItemIdentification>
-      <cac:StandardItemIdentification>
-        <cbc:ID schemeID="GTIN" schemeAgencyID="9">1234567890126</cbc:ID>
-      </cac:StandardItemIdentification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="113" listID="UNSPSC">32344324</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="2" listID="CPV">65434566</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
-      <ClassifiedTaxCategory xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
-        <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">AA</cbc:ID>
-        <cbc:Percent>10</cbc:Percent>
-        <TaxScheme>
-          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
-        </TaxScheme>
-      </ClassifiedTaxCategory>
-    </cac:Item>
-    <cac:Price>
-      <cbc:PriceAmount currencyID="EUR">2.48</cbc:PriceAmount>
-      <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
-      <cac:AllowanceCharge>
-        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
-        <cbc:AllowanceChargeReason>Contract</cbc:AllowanceChargeReason>
-        <cbc:MultiplierFactorNumeric>0.1</cbc:MultiplierFactorNumeric>
-        <cbc:Amount currencyID="EUR">0.275</cbc:Amount>
-        <cbc:BaseAmount currencyID="EUR">2.75</cbc:BaseAmount>
-      </cac:AllowanceCharge>
-    </cac:Price>
-  </cac:InvoiceLine>
-  <cac:InvoiceLine>
-    <cbc:ID>4</cbc:ID>
-    <cbc:InvoicedQuantity unitCode="C62">-1</cbc:InvoicedQuantity>
-    <cbc:LineExtensionAmount currencyID="EUR">-25</cbc:LineExtensionAmount>
-    <cac:OrderLineReference>
-      <cbc:LineID>2</cbc:LineID>
-    </cac:OrderLineReference>
-    <cac:TaxTotal>
-      <cbc:TaxAmount currencyID="EUR">0</cbc:TaxAmount>
-    </cac:TaxTotal>
-    <cac:Item>
-      <cbc:Name>Returned IBM 5150 desktop</cbc:Name>
-      <cac:SellersItemIdentification>
-        <cbc:ID>JB010</cbc:ID>
-      </cac:SellersItemIdentification>
-      <cac:StandardItemIdentification>
-        <cbc:ID schemeID="GTIN" schemeAgencyID="9">1234567890127</cbc:ID>
-      </cac:StandardItemIdentification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="113" listID="UNSPSC">12344322</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="2" listID="CPV">65434565</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
-      <ClassifiedTaxCategory xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
-        <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">E</cbc:ID>
-        <cbc:Percent>0</cbc:Percent>
-        <TaxScheme>
-          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
-        </TaxScheme>
-      </ClassifiedTaxCategory>
-    </cac:Item>
-    <cac:Price>
-      <cbc:PriceAmount currencyID="EUR">25</cbc:PriceAmount>
-      <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
-    </cac:Price>
-  </cac:InvoiceLine>
-  <cac:InvoiceLine>
-    <cbc:ID>5</cbc:ID>
-    <cbc:InvoicedQuantity unitCode="C62">250</cbc:InvoicedQuantity>
-    <cbc:LineExtensionAmount currencyID="EUR">187.5</cbc:LineExtensionAmount>
-    <cbc:AccountingCost>BookingCode002</cbc:AccountingCost>
-    <cac:OrderLineReference>
-      <cbc:LineID>4</cbc:LineID>
-    </cac:OrderLineReference>
-    <cac:TaxTotal>
-      <cbc:TaxAmount currencyID="EUR">37.5</cbc:TaxAmount>
-    </cac:TaxTotal>
-    <cac:Item>
-      <cbc:Name>Network cable</cbc:Name>
-      <cac:SellersItemIdentification>
-        <cbc:ID>JB011</cbc:ID>
-      </cac:SellersItemIdentification>
-      <cac:StandardItemIdentification>
-        <cbc:ID schemeID="GTIN" schemeAgencyID="9">1234567890128</cbc:ID>
-      </cac:StandardItemIdentification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="113" listID="UNSPSC">12344325</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
-      <cac:CommodityClassification>
-        <cbc:ItemClassificationCode listAgencyID="2" listID="CPV">65434564</cbc:ItemClassificationCode>
-      </cac:CommodityClassification>
-      <ClassifiedTaxCategory xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
-        <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">S</cbc:ID>
-        <cbc:Percent>20</cbc:Percent>
-        <TaxScheme>
-          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
-        </TaxScheme>
-      </ClassifiedTaxCategory>
-      <cac:AdditionalItemProperty>
-        <cbc:Name>Type</cbc:Name>
-        <cbc:Value>Cat5</cbc:Value>
-      </cac:AdditionalItemProperty>
-    </cac:Item>
-    <cac:Price>
-      <cbc:PriceAmount currencyID="EUR">0.75</cbc:PriceAmount>
-      <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
-    </cac:Price>
-  </cac:InvoiceLine>
 </Invoice>

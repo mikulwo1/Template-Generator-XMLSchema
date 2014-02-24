@@ -12,6 +12,11 @@ my $vars  = {
         UBLVersionID => "2.1",
         ID => "TOSL108",
         IssueDate => "2009-12-15",
+        InvoiceTypeCode => {
+            listID => "UN/ECE 1001 Subset",
+            listAgencyID => "6",
+            ttext => "380",
+        }, 
         Notes => [
             {
                 languageID => "en",
@@ -322,6 +327,20 @@ my $vars  = {
                     ],
                     ClassifiedTaxCategories => [
                         {
+                            xmlns => "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+                            ID => {
+                                schemeID => "UN/ECE 5305",
+                                schemeAgencyID => "6",
+                                ttext => "S",
+                            },
+                            Percent => "20",
+                            TaxScheme => {
+                                ID => {
+                                    schemeID => "UN/ECE 5153",
+                                    schemeAgencyID => "6",
+                                    ttext => "VAT",
+                                },
+                            },
                         },
                     ],
                     AdditionalItemProperties => [
@@ -359,6 +378,361 @@ my $vars  = {
                             },
                         },
                     ],
+                },
+            },
+            {
+                ID => "2",
+                Notes => [
+                    {
+                        ttext => "Cover is slightly damaged.",
+                    },
+                ],
+                LineExtensionAmount => {
+                    currencyID => "EUR",
+                    ttext => "-3.96",
+                },
+                InvoicedQuantity => {
+                    unitCode => "C62",
+                    ttext => "-1",
+                },
+                OrderLineReferences => [
+                    {
+                        LineID => "5",
+                    },
+                ],
+                TaxTotals => [
+                    {
+                        TaxAmount => {
+                            currencyID => "EUR",
+                            ttext => "-0.396",
+                        },
+                    },
+                ],
+                Item => {
+                    Name => 'Returned "Advanced computing" book',
+                    SellersItemIdentification => {
+                        ID => "JB008",
+                    },
+                    StandardItemIdentification => {
+                        ID => {
+                            schemeID => "GTIN",
+                            schemeAgencyID => "9",
+                            ttext => "1234567890125",
+                        }
+                    },
+                    CommodityClassifications => [
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "113",
+                                listID => "UNSPSC",
+                                ttext => "32344324",
+                           },
+                        },
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "2",
+                                listID => "CPV",
+                                ttext => "65434567",
+                            },
+                        },
+                    ],
+                    ClassifiedTaxCategories => [
+                        {
+                            xmlns => "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+                            ID => {
+                                schemeID => "UN/ECE 5305",
+                                schemeAgencyID => "6",
+                                ttext => "AA",
+                            },
+                            Percent => "10",
+                            TaxScheme => {
+                                ID => {
+                                    schemeID => "UN/ECE 5153",
+                                    schemeAgencyID => "6",
+                                    ttext => "VAT",
+                                },
+                            },
+                        },
+                    ],
+                },
+                Price => {
+                    PriceAmount => {
+                        currencyID => "EUR",
+                        ttext => "3.96",
+                    },
+                    BaseQuantity => {
+                        unitCode => "C62",
+                        ttext => "1",
+                    },
+                },
+            },
+            {
+                ID => "3",
+                LineExtensionAmount => {
+                    currencyID => "EUR",
+                    ttext => "4.96",
+                },
+                InvoicedQuantity => {
+                    unitCode => "C62",
+                    ttext => "2",
+                },
+                OrderLineReferences => [
+                    {
+                        LineID => "3",
+                    },
+                ],
+                TaxTotals => [
+                    {
+                        TaxAmount => {
+                            currencyID => "EUR",
+                            ttext => "0.496",
+                        },
+                    },
+                ],
+                Item => {
+                    Name => '"Computing for dummies" book',
+                    SellersItemIdentification => {
+                        ID => "JB009",
+                    },
+                    StandardItemIdentification => {
+                        ID => {
+                            schemeID => "GTIN",
+                            schemeAgencyID => "9",
+                            ttext => "1234567890126",
+                        }
+                    },
+                    CommodityClassifications => [
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "113",
+                                listID => "UNSPSC",
+                                ttext => "32344324",
+                           },
+                        },
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "2",
+                                listID => "CPV",
+                                ttext => "65434566",
+                            },
+                        },
+                    ],
+                    ClassifiedTaxCategories => [
+                        {
+                            xmlns => "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+                            ID => {
+                                schemeID => "UN/ECE 5305",
+                                schemeAgencyID => "6",
+                                ttext => "AA",
+                            },
+                            Percent => "10",
+                            TaxScheme => {
+                                ID => {
+                                    schemeID => "UN/ECE 5153",
+                                    schemeAgencyID => "6",
+                                    ttext => "VAT",
+                                },
+                            },
+                        },
+                    ],
+                },
+                Price => {
+                    PriceAmount => {
+                        currencyID => "EUR",
+                        ttext => "2.48",
+                    },
+                    BaseQuantity => {
+                        unitCode => "C62",
+                        ttext => "1",
+                    },
+                    AllowanceCharges => [
+                        {
+                            ChargeIndicator => "false",
+                            AllowanceChargeReasons => [
+                                {
+                                    ttext =>"Contract",
+                                },
+                            ],
+                            MultiplierFactorNumeric => "0.1",
+                            Amount => {
+                                currencyID => "EUR",
+                                ttext => "0.275",
+                            },
+                            BaseAmount => {
+                                currencyID => "EUR",
+                                ttext => "2.75",
+                            },
+                        },
+                    ],
+                },
+            },
+            {
+                ID => "4",
+                LineExtensionAmount => {
+                    currencyID => "EUR",
+                    ttext => "-25",
+                },
+                InvoicedQuantity => {
+                    unitCode => "C62",
+                    ttext => "-1",
+                },
+                OrderLineReferences => [
+                    {
+                        LineID => "2",
+                    },
+                ],
+                TaxTotals => [
+                    {
+                        TaxAmount => {
+                            currencyID => "EUR",
+                            ttext => "0",
+                        },
+                    },
+                ],
+                Item => {
+                    Name => 'Returned IBM 5150 desktop',
+                    SellersItemIdentification => {
+                        ID => "JB010",
+                    },
+                    StandardItemIdentification => {
+                        ID => {
+                            schemeID => "GTIN",
+                            schemeAgencyID => "9",
+                            ttext => "1234567890127",
+                        }
+                    },
+                    CommodityClassifications => [
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "113",
+                                listID => "UNSPSC",
+                                ttext => "12344322",
+                           },
+                        },
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "2",
+                                listID => "CPV",
+                                ttext => "65434565",
+                            },
+                        },
+                    ],
+                    ClassifiedTaxCategories => [
+                        {
+                            xmlns => "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+                            ID => {
+                                schemeID => "UN/ECE 5305",
+                                schemeAgencyID => "6",
+                                ttext => "E",
+                            },
+                            Percent => "0",
+                            TaxScheme => {
+                                ID => {
+                                    schemeID => "UN/ECE 5153",
+                                    schemeAgencyID => "6",
+                                    ttext => "VAT",
+                                },
+                            },
+                        },
+                    ],
+                },
+                Price => {
+                    PriceAmount => {
+                        currencyID => "EUR",
+                        ttext => "25",
+                    },
+                    BaseQuantity => {
+                        unitCode => "C62",
+                        ttext => "1",
+                    },
+                },
+            },
+            {
+                ID => "5",
+                LineExtensionAmount => {
+                    currencyID => "EUR",
+                    ttext => "187.5",
+                },
+                InvoicedQuantity => {
+                    unitCode => "C62",
+                    ttext => "250",
+                },
+                AccountingCost => "BookingCode002",
+                OrderLineReferences => [
+                    {
+                        LineID => "4",
+                    },
+                ],
+                TaxTotals => [
+                    {
+                        TaxAmount => {
+                            currencyID => "EUR",
+                            ttext => "37.5",
+                        },
+                    },
+                ],
+                Item => {
+                    Name => "Network cable",
+                    SellersItemIdentification => {
+                        ID => "JB011",
+                    },
+                    StandardItemIdentification => {
+                        ID => {
+                            schemeID => "GTIN",
+                            schemeAgencyID => "9",
+                            ttext => "1234567890128",
+                        }
+                    },
+                    CommodityClassifications => [
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "113",
+                                listID => "UNSPSC",
+                                ttext => "12344325",
+                           },
+                        },
+                        {
+                           ItemClassificationCode => {
+                                listAgencyID => "2",
+                                listID => "CPV",
+                                ttext => "65434564",
+                            },
+                        },
+                    ],
+                    ClassifiedTaxCategories => [
+                        {
+                            xmlns => "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+                            ID => {
+                                schemeID => "UN/ECE 5305",
+                                schemeAgencyID => "6",
+                                ttext => "S",
+                            },
+                            Percent => "20",
+                            TaxScheme => {
+                                ID => {
+                                    schemeID => "UN/ECE 5153",
+                                    schemeAgencyID => "6",
+                                    ttext => "VAT",
+                                },
+                            },
+                        },
+                    ],
+                    AdditionalItemProperties => [
+                        {
+                            Name => "Type",
+                            Value => "Cat5",
+                        },
+                    ],
+                },
+                Price => {
+                    PriceAmount => {
+                        currencyID => "EUR",
+                        ttext => "0.75",
+                    },
+                    BaseQuantity => {
+                        unitCode => "C62",
+                        ttext => "1",
+                    },
                 },
             },
         ],
